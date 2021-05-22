@@ -41,7 +41,6 @@ do
     grep -m 100 -Ef subset.$chrom.variants.txt $path_dic/subset.chr$chrom2.final.dic_grch38 | wc -l >$chrom.matches_grch38.txt
 done
 
-
 head *.matches_gb17.txt>>all_match_gb17
 head *.matches_grch37.txt>>all_match_grch37
 head *.matches_grch38.txt>>all_match_grch38
@@ -50,43 +49,25 @@ head *.matches_grch38.txt>>all_match_grch38
 mkdir variants_subset
 mv subset* ./variants_subset
 
-mkdir gb17
+mkdir gb17 grch37 grch38
 mv *.matches_gb17.txt ./gb17/
-cd gb17
-sum=0
-mypath=$(pwd)
-mypath=$(basename $mypath)
-for i in $(ls *.txt); do value=$(head -n 1 $i); sum=$((sum+ value)); done
-chrom_tot=$(ls *.txt | wc -l | awk '{print $1}')
-echo "There are $sum matches and $chrom_tot chromosomes in reference $mypath" >>../final
-cd ..
-
-mkdir grch37
 mv *.matches_grch37.txt ./grch37/
-cd grch37
-sum=0
-mypath=$(pwd)
-mypath=$(basename $mypath)
-for i in $(ls *.txt); do value=$(head -n 1 $i); sum=$((sum+ value)); done
-chrom_tot=$(ls *.txt | wc -l | awk '{print $1}')
-echo "There are $sum matches and $chrom_tot chromosomes in reference $mypath" >>../final
-cd ..
-
-mkdir grch38
 mv *.matches_grch38.txt ./grch38/
-cd grch38
-sum=0
-mypath=$(pwd)
-mypath=$(basename $mypath)
-for i in $(ls *.txt); do value=$(head -n 1 $i); sum=$((sum+ value)); done
-chrom_tot=$(ls *.txt | wc -l | awk '{print $1}')
-echo "There are $sum matches and $chrom_tot chromosomes in reference $mypath" >>../final
-cd ..
+
+# Declare a string array with type
+declare -a StringArray=("gb17" "grch37" "grch38")
+
+# Read the array values with space
+for j in "${StringArray[@]}"
+do
+	cd $j
+	sum=0
+	mypath=$(pwd)
+	mypath=$(basename $mypath)
+	for i in $(ls *.txt); do value=$(head -n 1 $i); sum=$((sum+ value)); done
+	chrom_tot=$(ls *.txt | wc -l | awk '{print $1}')
+	echo "There are $sum matches and $chrom_tot chromosomes in reference $mypath" >>../final
+	cd ..
+done
 
 awk -v max=0 '{if($3>max){want=$10; max=$3}}END{print want} ' final >infer_ref
-
-
-
-
-
-
