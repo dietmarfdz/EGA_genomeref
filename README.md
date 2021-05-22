@@ -1,5 +1,5 @@
 # Name
-genome_ref_cal_v3.4.sh: Script for inferring the genome reference from a vcf file. Works with genome ref grch37, grch38 and hg17.
+genome_ref_cal.sh: Script for inferring the genome reference from a vcf file. Works with genome ref grch37, grch38 and hg17.
 
 # Synopsis
 
