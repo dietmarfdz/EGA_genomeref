@@ -3,8 +3,8 @@
 
 ###################################################################
 #Script Name    : genome_ref_cal.sh
-#Date           : 2021-04-07
-#Version        : 3.4
+#Date           : 2021-05-22
+#Version        : 3.5
 #Author         : Dietmar Fernandez (dietmar.fernandez@crg.eu)
 #usage          : bash genome_ref_cal.sh
 #Description    : This script allows to calculate the genome reference from a vcf file. We extracted unique nucleotides per pos in hg17, grch37, grch38 and created a dictionary.
