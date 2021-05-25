@@ -23,7 +23,7 @@ You need to run the script where the file.vcf.gz is located.
 
 
 ```
-bash /path/genome_ref_cal_v3.4.sh 
+bash /path/genome_ref_cal.sh 
 ```
 
 # Demo
